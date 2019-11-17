@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QString>
 
+#define TIMER_CBL_INTERVAL 1000
+
 class MyClipboardLogger : public QObject
 {
     Q_OBJECT
@@ -12,7 +14,7 @@ private:
     QTimer *timer = nullptr;
     QString lastEntry;
 protected:
-    void setTimer(QTimer *to, int msec = 1000);
+    void setTimer(QTimer *to, int msec = TIMER_CBL_INTERVAL);
     QTimer * getTimer(void);
     void setLastEntry(QString entry);
     QString getLastEntry(void);

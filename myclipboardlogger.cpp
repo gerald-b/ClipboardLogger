@@ -14,7 +14,7 @@ void MyClipboardLogger::setTimer(QTimer *to, int msec)
     }
     else
     {
-        this->timer->setInterval(1000);
+        this->timer->setInterval(TIMER_CBL_INTERVAL);
     }
 }
 
