@@ -29,6 +29,7 @@ protected:
     void loadAndDeploySettings(void);
 public:
     explicit MyClipboardLogger(QObject *parent = nullptr);
+    virtual ~MyClipboardLogger(void);
     void startTimer(void);
     void stopTimer(void);
 signals:

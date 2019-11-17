@@ -85,6 +85,18 @@ MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
     this->loadAndDeploySettings();
 }
 
+MyClipboardLogger::~MyClipboardLogger()
+{
+    if (nullptr != this->timer)
+    {
+        delete this->timer;
+    }
+    if (nullptr != this->mySettings)
+    {
+        delete this->mySettings;
+    }
+}
+
 void MyClipboardLogger::startTimer()
 {
     this->timer->start();
