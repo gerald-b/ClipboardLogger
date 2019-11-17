@@ -1,12 +1,21 @@
 #include "myclipboardlogger.hpp"
 
-void MyClipboardLogger::setTimer(QTimer *to)
+void MyClipboardLogger::setTimer(QTimer *to, int msec)
 {
     if(nullptr != this->timer)
     {
         delete  this->timer;
     }
     this->timer = to;
+
+    if (msec > 0)
+    {
+        this->timer->setInterval(msec);
+    }
+    else
+    {
+        this->timer->setInterval(1000);
+    }
 }
 
 QTimer *MyClipboardLogger::getTimer()

@@ -12,7 +12,7 @@ private:
     QTimer *timer = nullptr;
     QString lastEntry;
 protected:
-    void setTimer(QTimer *to);
+    void setTimer(QTimer *to, int msec = 1000);
     QTimer * getTimer(void);
     void setLastEntry(QString entry);
     QString getLastEntry(void);
