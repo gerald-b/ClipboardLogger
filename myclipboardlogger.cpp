@@ -33,6 +33,20 @@ QString MyClipboardLogger::getLastEntry()
     return this->lastEntry;
 }
 
+void MyClipboardLogger::setSettings(QSettings *settings)
+{
+    if(nullptr != this->mySettings)
+    {
+        delete  this->mySettings;
+    }
+    this->mySettings = settings;
+}
+
+QSettings *MyClipboardLogger::getSettings()
+{
+    return this->mySettings;
+}
+
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
 {
     this->setLastEntry("");
