@@ -20,6 +20,8 @@ private:
 protected:
     void setTimer(QTimer *to, int msec = TIMER_CBL_INTERVAL);
     QTimer * getTimer(void);
+    void setTimerInterval(int msec);
+    int getTimerInterval(void);
     void setLastEntry(QString entry);
     QString getLastEntry(void);
     void setSettings(QSettings *settings);

@@ -8,6 +8,16 @@ void MyClipboardLogger::setTimer(QTimer *to, int msec)
     }
     this->timer = to;
 
+    this->setTimerInterval(msec);
+}
+
+QTimer *MyClipboardLogger::getTimer()
+{
+    return this->timer;
+}
+
+void MyClipboardLogger::setTimerInterval(int msec)
+{
     if (msec > 0)
     {
         this->timer->setInterval(msec);
@@ -18,9 +28,9 @@ void MyClipboardLogger::setTimer(QTimer *to, int msec)
     }
 }
 
-QTimer *MyClipboardLogger::getTimer()
+int MyClipboardLogger::getTimerInterval()
 {
-    return this->timer;
+    return this->timer->interval();
 }
 
 void MyClipboardLogger::setLastEntry(QString entry)
