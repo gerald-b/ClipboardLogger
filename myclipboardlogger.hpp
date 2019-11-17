@@ -26,6 +26,7 @@ protected:
     QString getLastEntry(void);
     void setSettings(QSettings *settings);
     QSettings * getSettings(void);
+    void loadAndDeploySettings(void);
 public:
     explicit MyClipboardLogger(QObject *parent = nullptr);
     void startTimer(void);

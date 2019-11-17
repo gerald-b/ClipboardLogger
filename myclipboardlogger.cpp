@@ -57,6 +57,16 @@ QSettings *MyClipboardLogger::getSettings()
     return this->mySettings;
 }
 
+void MyClipboardLogger::loadAndDeploySettings()
+{
+    if (nullptr == this->mySettings)
+    {
+        QMessageBox::critical(nullptr,tr("Error"),tr("Settings Pointer not set!"),QMessageBox::Ok);
+        return;
+    }
+    this->setTimerInterval(this->mySettings->value("global/interval").toInt());
+}
+
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
 {
     this->setLastEntry("");
