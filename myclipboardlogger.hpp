@@ -34,6 +34,9 @@ public:
 signals:
 
 public slots:
+
+private slots:
+    void handleTimeout(void);
 };
 
 #endif // MYCLIPBOARDLOGGER_HPP

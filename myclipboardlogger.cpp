@@ -80,6 +80,8 @@ MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
         exit(1);
     }
     this->setSettings(new QSettings("settings.ini",QSettings::IniFormat));
+
+    connect(this->timer,&QTimer::timeout,this,&MyClipboardLogger::handleTimeout);
 }
 
 void MyClipboardLogger::startTimer()
@@ -90,4 +92,9 @@ void MyClipboardLogger::startTimer()
 void MyClipboardLogger::stopTimer()
 {
     this->timer->stop();
+}
+
+void MyClipboardLogger::handleTimeout()
+{
+
 }
