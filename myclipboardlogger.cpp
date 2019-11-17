@@ -14,6 +14,16 @@ QTimer *MyClipboardLogger::getTimer()
     return this->timer;
 }
 
+void MyClipboardLogger::setLastEntry(QString entry)
+{
+    this->lastEntry = entry;
+}
+
+QString MyClipboardLogger::getLastEntry()
+{
+    return this->lastEntry;
+}
+
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
 {
 
