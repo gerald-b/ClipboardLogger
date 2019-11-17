@@ -26,5 +26,6 @@ QString MyClipboardLogger::getLastEntry()
 
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
 {
-
+    this->setLastEntry("");
+    this->setTimer(new QTimer(this));
 }
