@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QString>
 #include <QSettings>
+#include <QFile>
+#include <QMessageBox>
 
 #define TIMER_CBL_INTERVAL 1000
 

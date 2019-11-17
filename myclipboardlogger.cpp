@@ -51,6 +51,15 @@ MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
 {
     this->setLastEntry("");
     this->setTimer(new QTimer(this));
+    if (!QFile::exists("settings.ini"))
+    {
+        QMessageBox::critical(nullptr,
+                              tr("Error"),
+                              tr("The settings-file \"settings.ini\" was not found! Program will be terminated!"),
+                              QMessageBox::Ok);
+        exit(1);
+    }
+    this->setSettings(new QSettings("settings.ini",QSettings::IniFormat));
 }
 
 void MyClipboardLogger::startTimer()
