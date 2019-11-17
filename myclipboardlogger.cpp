@@ -82,6 +82,7 @@ MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
     this->setSettings(new QSettings("settings.ini",QSettings::IniFormat));
 
     connect(this->timer,&QTimer::timeout,this,&MyClipboardLogger::handleTimeout);
+    this->loadAndDeploySettings();
 }
 
 void MyClipboardLogger::startTimer()
