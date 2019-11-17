@@ -109,5 +109,22 @@ void MyClipboardLogger::stopTimer()
 
 void MyClipboardLogger::handleTimeout()
 {
-
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    QString originalText = clipboard->text();
+    if (originalText != this->getLastEntry())
+    {
+        QFile *file = new QFile("out.log");
+        if (!file->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
+        {
+            return;
+        }
+        QTextStream outTextStream(file);
+        outTextStream << originalText.trimmed() << "\n";
+        if (file->isOpen())
+        {
+            file->close();
+        }
+        delete file;
+        this->setLastEntry(originalText);
+    }
 }

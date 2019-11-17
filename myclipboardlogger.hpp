@@ -7,6 +7,9 @@
 #include <QSettings>
 #include <QFile>
 #include <QMessageBox>
+#include <QGuiApplication>
+#include <QClipboard>
+#include <QTextStream>
 
 #define TIMER_CBL_INTERVAL 1000
 
