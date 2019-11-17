@@ -38,3 +38,13 @@ MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
     this->setLastEntry("");
     this->setTimer(new QTimer(this));
 }
+
+void MyClipboardLogger::startTimer()
+{
+    this->timer->start();
+}
+
+void MyClipboardLogger::stopTimer()
+{
+    this->timer->stop();
+}

@@ -20,7 +20,8 @@ protected:
     QString getLastEntry(void);
 public:
     explicit MyClipboardLogger(QObject *parent = nullptr);
-
+    void startTimer(void);
+    void stopTimer(void);
 signals:
 
 public slots:
