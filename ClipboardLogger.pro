@@ -32,7 +32,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     settings_sample.ini
 
-copydata.commands = $(COPY_DIR) $$PWD/settings*.ini $$OUT_PWD
+CONFIG(debug, debug|release) {
+    VARIANT = debug
+} else {
+    VARIANT = release
+}
+
+win32 {
+    COPY_FROM_PATH=$$shell_path($$PWD/settings*.ini)
+    COPY_TO_PATH=$$shell_path($$OUT_PWD/$$VARIANT/)
+}
+else {
+    COPY_FROM_PATH=$$PWD/settings*.ini
+    COPY_TO_PATH=$$OUT_PWD/
+}
+
+copydata.commands = $(COPY_DIR) $$COPY_FROM_PATH $$COPY_TO_PATH
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
