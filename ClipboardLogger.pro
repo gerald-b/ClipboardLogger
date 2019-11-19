@@ -20,7 +20,8 @@ SOURCES += \
     myclipboardlogger.cpp
 
 HEADERS += \
-    myclipboardlogger.hpp
+    myclipboardlogger.hpp \
+    version.hpp
 
 FORMS +=
 
