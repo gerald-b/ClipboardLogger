@@ -53,3 +53,7 @@ first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
+
+
+#Target Version
+VERSION = $${MY_VERSION_MAJOR}.$${MY_VERSION_MINOR}.$${MY_VERSIOM_PATCH}.$${MY_VERSION_REVISON}
