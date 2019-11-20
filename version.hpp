@@ -1,9 +1,0 @@
-#ifndef VERSION_HPP
-#define VERSION_HPP
-
-#define MY_VERSION_MAJOR 0
-#define MY_VERSION_MINOR 1
-#define MY_VERSIOM_PATCH 0
-#define MY_VERSION_REVISON 0
-
-#endif // VERSION_HPP
