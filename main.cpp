@@ -13,7 +13,16 @@ int main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		QCoreApplication a(argc, argv);
-		std::cout << MY_VERSION << std::endl;
+        for(int i=1; i<argc; ++i)
+        {
+            QString curElement = QString(argv[i]);
+            if (curElement.toUpper() == "--VERSION" ||
+                    curElement.toUpper() == "-V"
+                    )
+            {
+                std::cout << MY_VERSION << std::endl;
+            }
+        }
 		return EXIT_SUCCESS;
 	}
 	else
