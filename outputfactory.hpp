@@ -3,6 +3,7 @@
 
 #include "ioutput.hpp"
 #include "enum_outputtype.hpp"
+#include "outputfile.hpp"
 
 class OutputFactory
 {

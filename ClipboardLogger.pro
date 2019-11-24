@@ -20,13 +20,15 @@ SOURCES += \
     ioutput.cpp \
     main.cpp \
     myclipboardlogger.cpp \
-    outputfactory.cpp
+    outputfactory.cpp \
+    outputfile.cpp
 
 HEADERS += \
     enum_outputtype.hpp \
     ioutput.hpp \
     myclipboardlogger.hpp \
-    outputfactory.hpp
+    outputfactory.hpp \
+    outputfile.hpp
 
 FORMS +=
 

@@ -57,24 +57,6 @@ QSettings *MyClipboardLogger::getSettings()
     return this->mySettings;
 }
 
-void MyClipboardLogger::setOutputFile(QFile *file)
-{
-    if(nullptr != this->outputFile)
-    {
-        delete this->outputFile;
-    }
-    this->outputFile = file;
-}
-
-void MyClipboardLogger::setOutputFile(QString filepath)
-{
-    this->setOutputFile(new QFile(filepath));
-}
-
-QFile *MyClipboardLogger::getOutputFile()
-{
-    return this->outputFile;
-}
 
 void MyClipboardLogger::loadAndDeploySettings()
 {
@@ -83,8 +65,8 @@ void MyClipboardLogger::loadAndDeploySettings()
         QMessageBox::critical(nullptr,tr("Error"),tr("Settings Pointer not set!"),QMessageBox::Ok);
         return;
     }
-    this->setTimerInterval(this->mySettings->value("global/interval").toInt());
-    this->setOutputFile(this->mySettings->value("global/outputFile","out.log").toString());
+    this->setTimerInterval(this->mySettings->value("global/interval", 1000).toInt());
+    // this->setOutputFile(this->mySettings->value("global/outputFile", "out.log").toString());
 }
 
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
@@ -115,10 +97,6 @@ MyClipboardLogger::~MyClipboardLogger()
     {
         delete this->mySettings;
     }
-    if(nullptr != this->outputFile)
-    {
-        delete this->outputFile;
-    }
 }
 
 void MyClipboardLogger::startTimer()
@@ -137,16 +115,9 @@ void MyClipboardLogger::handleTimeout()
     QString originalText = clipboard->text();
     if (originalText != this->getLastEntry())
     {
-        if (!this->getOutputFile()->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
-        {
-            return;
-        }
-        QTextStream outTextStream(this->getOutputFile());
-        outTextStream << originalText.trimmed() << "\n";
-        if (this->getOutputFile()->isOpen())
-        {
-            this->getOutputFile()->close();
-        }
+        OutputFactory * outF = new OutputFactory() ;
+        IOutput * out = outF->getOutput(OutputType::FILE);
+        out->writeContent(originalText);
         this->setLastEntry(originalText);
     }
 }
