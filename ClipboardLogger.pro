@@ -22,6 +22,7 @@ SOURCES += \
     myclipboardlogger.cpp
 
 HEADERS += \
+    enum_outputtype.hpp \
     ioutput.hpp \
     myclipboardlogger.hpp
 
