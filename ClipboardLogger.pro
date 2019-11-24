@@ -31,6 +31,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    settings.ini \
     settings_sample.ini
 
 CONFIG(debug, debug|release) {
