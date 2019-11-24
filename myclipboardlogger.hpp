@@ -9,6 +9,7 @@
 #include <QGuiApplication>
 #include <QClipboard>
 #include "enum_outputtype.hpp"
+#include "ioutput.hpp"
 #include "outputfactory.hpp"
 #include "outputfile.hpp"
 
@@ -21,6 +22,7 @@ private:
     QTimer *timer = nullptr;
     QString lastEntry;
     QSettings *mySettings = nullptr;
+    IOutput * myOutput = nullptr;
 protected:
     void setTimer(QTimer *to, int msec = TIMER_CBL_INTERVAL);
     QTimer * getTimer(void);
@@ -30,6 +32,8 @@ protected:
     QString getLastEntry(void);
     void setSettings(QSettings *settings);
     QSettings * getSettings(void);
+    void setOutput(IOutput * output);
+    IOutput * getOutput(void);
     void loadAndDeploySettings(void);
 public:
     explicit MyClipboardLogger(QObject *parent = nullptr);

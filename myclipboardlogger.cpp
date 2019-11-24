@@ -57,6 +57,20 @@ QSettings *MyClipboardLogger::getSettings()
     return this->mySettings;
 }
 
+void MyClipboardLogger::setOutput(IOutput *output)
+{
+    if(nullptr == this->myOutput)
+    {
+        delete this->myOutput;
+    }
+    this->myOutput = output;
+}
+
+IOutput *MyClipboardLogger::getOutput()
+{
+    return this->myOutput;
+}
+
 
 void MyClipboardLogger::loadAndDeploySettings()
 {
@@ -66,7 +80,17 @@ void MyClipboardLogger::loadAndDeploySettings()
         return;
     }
     this->setTimerInterval(this->mySettings->value("global/interval", 1000).toInt());
-    // this->setOutputFile(this->mySettings->value("global/outputFile", "out.log").toString());
+    OutputFactory * outF = new OutputFactory(this->getSettings());
+    QString otfs = this->getSettings()->value("global/outtype","file").toString();
+    if (otfs.toUpper() == "FILE")
+    {
+        this->setOutput(outF->getOutput(OutputType::FILE));
+    }
+    else // non valid setting is also file output
+    {
+        this->setOutput(outF->getOutput(OutputType::FILE));
+    }
+    delete outF;
 }
 
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
@@ -115,9 +139,7 @@ void MyClipboardLogger::handleTimeout()
     QString originalText = clipboard->text();
     if (originalText != this->getLastEntry())
     {
-        OutputFactory * outF = new OutputFactory() ;
-        IOutput * out = outF->getOutput(OutputType::FILE);
-        out->writeContent(originalText);
+        this->getOutput()->writeContent(originalText);
         this->setLastEntry(originalText);
     }
 }
