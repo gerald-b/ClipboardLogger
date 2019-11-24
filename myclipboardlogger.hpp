@@ -1,4 +1,4 @@
-#ifndef MYCLIPBOARDLOGGER_HPP
+﻿#ifndef MYCLIPBOARDLOGGER_HPP
 #define MYCLIPBOARDLOGGER_HPP
 
 #include <QObject>
@@ -20,6 +20,7 @@ private:
     QTimer *timer = nullptr;
     QString lastEntry;
     QSettings *mySettings = nullptr;
+    QFile *outputFile = nullptr;
 protected:
     void setTimer(QTimer *to, int msec = TIMER_CBL_INTERVAL);
     QTimer * getTimer(void);
@@ -29,6 +30,9 @@ protected:
     QString getLastEntry(void);
     void setSettings(QSettings *settings);
     QSettings * getSettings(void);
+    void setOutputFile(QFile * file);
+    void setOutputFile(QString filepath);
+    QFile * getOutputFile(void);
     void loadAndDeploySettings(void);
 public:
     explicit MyClipboardLogger(QObject *parent = nullptr);

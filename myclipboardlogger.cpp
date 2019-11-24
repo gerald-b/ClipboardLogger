@@ -57,6 +57,25 @@ QSettings *MyClipboardLogger::getSettings()
     return this->mySettings;
 }
 
+void MyClipboardLogger::setOutputFile(QFile *file)
+{
+    if(nullptr != this->outputFile)
+    {
+        delete this->outputFile;
+    }
+    this->outputFile = file;
+}
+
+void MyClipboardLogger::setOutputFile(QString filepath)
+{
+    this->setOutputFile(new QFile(filepath));
+}
+
+QFile *MyClipboardLogger::getOutputFile()
+{
+    return this->outputFile;
+}
+
 void MyClipboardLogger::loadAndDeploySettings()
 {
     if (nullptr == this->mySettings)
@@ -65,6 +84,7 @@ void MyClipboardLogger::loadAndDeploySettings()
         return;
     }
     this->setTimerInterval(this->mySettings->value("global/interval").toInt());
+    this->setOutputFile(this->mySettings->value("global/outputFile","out.log").toString());
 }
 
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
@@ -95,6 +115,10 @@ MyClipboardLogger::~MyClipboardLogger()
     {
         delete this->mySettings;
     }
+    if(nullptr != this->outputFile)
+    {
+        delete this->outputFile;
+    }
 }
 
 void MyClipboardLogger::startTimer()
@@ -113,18 +137,16 @@ void MyClipboardLogger::handleTimeout()
     QString originalText = clipboard->text();
     if (originalText != this->getLastEntry())
     {
-        QFile *file = new QFile("out.log");
-        if (!file->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
+        if (!this->getOutputFile()->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
         {
             return;
         }
-        QTextStream outTextStream(file);
+        QTextStream outTextStream(this->getOutputFile());
         outTextStream << originalText.trimmed() << "\n";
-        if (file->isOpen())
+        if (this->getOutputFile()->isOpen())
         {
-            file->close();
+            this->getOutputFile()->close();
         }
-        delete file;
         this->setLastEntry(originalText);
     }
 }
