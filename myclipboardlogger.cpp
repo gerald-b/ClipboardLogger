@@ -86,6 +86,10 @@ void MyClipboardLogger::loadAndDeploySettings()
     {
         this->setOutput(outF->getOutput(OutputType::FILE));
     }
+    else if (otfs.toUpper() == "SQLITE")
+    {
+        this->setOutput(outF->getOutput(OutputType::SQLITE));
+    }
     else // non valid setting is also file output
     {
         this->setOutput(outF->getOutput(OutputType::FILE));

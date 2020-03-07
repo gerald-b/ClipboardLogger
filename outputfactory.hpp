@@ -5,6 +5,7 @@
 #include "ioutput.hpp"
 #include "enum_outputtype.hpp"
 #include "outputfile.hpp"
+#include "outputsqlite.hpp"
 
 class OutputFactory
 {
