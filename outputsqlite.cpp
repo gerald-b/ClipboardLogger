@@ -59,7 +59,6 @@ void OutputSqlite::writeContent(QString content)
 
     QSqlQuery query("",this->myDb);
     query.exec(sql);
-    // QMessageBox::critical(nullptr,"ERR",query.lastError().text(),QMessageBox::Ok);
 
     if(this->myDb.isOpen())
     {

@@ -3,7 +3,6 @@
 
 #include <QFileInfo>
 #include <QDateTime>
-#include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
