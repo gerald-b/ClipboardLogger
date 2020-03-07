@@ -3,7 +3,8 @@
 
 enum class OutputType
 {
-    FILE
+    FILE,
+    SQLITE
 };
 
 #endif // ENUM_OUTPUTTYPE_HPP
