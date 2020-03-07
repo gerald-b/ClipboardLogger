@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,14 +21,16 @@ SOURCES += \
     main.cpp \
     myclipboardlogger.cpp \
     outputfactory.cpp \
-    outputfile.cpp
+    outputfile.cpp \
+    outputsqlite.cpp
 
 HEADERS += \
     enum_outputtype.hpp \
     ioutput.hpp \
     myclipboardlogger.hpp \
     outputfactory.hpp \
-    outputfile.hpp
+    outputfile.hpp \
+    outputsqlite.hpp
 
 FORMS +=
 
