@@ -59,7 +59,7 @@ QSettings *MyClipboardLogger::getSettings()
 
 void MyClipboardLogger::setOutput(IOutput *output)
 {
-    if(nullptr == this->myOutput)
+    if(nullptr != this->myOutput)
     {
         delete this->myOutput;
     }
