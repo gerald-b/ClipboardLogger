@@ -57,6 +57,21 @@ QSettings *MyClipboardLogger::getSettings()
     return this->mySettings;
 }
 
+void MyClipboardLogger::setOutput(IOutput *output)
+{
+    if(nullptr != this->myOutput)
+    {
+        delete this->myOutput;
+    }
+    this->myOutput = output;
+}
+
+IOutput *MyClipboardLogger::getOutput()
+{
+    return this->myOutput;
+}
+
+
 void MyClipboardLogger::loadAndDeploySettings()
 {
     if (nullptr == this->mySettings)
@@ -64,7 +79,22 @@ void MyClipboardLogger::loadAndDeploySettings()
         QMessageBox::critical(nullptr,tr("Error"),tr("Settings Pointer not set!"),QMessageBox::Ok);
         return;
     }
-    this->setTimerInterval(this->mySettings->value("global/interval").toInt());
+    this->setTimerInterval(this->mySettings->value("global/interval", 1000).toInt());
+    OutputFactory * outF = new OutputFactory(this->getSettings());
+    QString otfs = this->getSettings()->value("global/outtype","file").toString();
+    if (otfs.toUpper() == "FILE")
+    {
+        this->setOutput(outF->getOutput(OutputType::FILE));
+    }
+    else if (otfs.toUpper() == "SQLITE")
+    {
+        this->setOutput(outF->getOutput(OutputType::SQLITE));
+    }
+    else // non valid setting is also file output
+    {
+        this->setOutput(outF->getOutput(OutputType::FILE));
+    }
+    delete outF;
 }
 
 MyClipboardLogger::MyClipboardLogger(QObject *parent) : QObject(parent)
@@ -113,18 +143,7 @@ void MyClipboardLogger::handleTimeout()
     QString originalText = clipboard->text();
     if (originalText != this->getLastEntry())
     {
-        QFile *file = new QFile("out.log");
-        if (!file->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
-        {
-            return;
-        }
-        QTextStream outTextStream(file);
-        outTextStream << originalText.trimmed() << "\n";
-        if (file->isOpen())
-        {
-            file->close();
-        }
-        delete file;
+        this->getOutput()->writeContent(originalText);
         this->setLastEntry(originalText);
     }
 }
